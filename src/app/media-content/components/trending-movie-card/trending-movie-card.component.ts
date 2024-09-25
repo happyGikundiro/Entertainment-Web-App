@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Movie } from '../../../model/model';
 
 @Component({
   selector: 'app-trending-movie-card',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './trending-movie-card.component.css'
 })
 export class TrendingMovieCardComponent {
+
+  @Input() movie!: Movie;
 
 }

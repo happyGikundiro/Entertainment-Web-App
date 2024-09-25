@@ -1,7 +1,7 @@
 <div class="text-white space-y-1 relative">
     <div class="w-[470px] h-[230px] relative overflow-hidden rounded-lg group">
 
-        <img src="https://media.istockphoto.com/id/455076581/photo/mobile-device-with-near-field-communication.jpg?b=1&s=612x612&w=0&k=20&c=mqFmMJrEcCA2XVTKTBML4NDLaZkI_MIWMJ_h6BeROiU=" 
+        <img [src]="movie.thumbnail.trending?.large" 
         alt="movie-image"
         class="w-full h-full object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-110">
 
@@ -24,20 +24,20 @@
 
     <div class='absolute bottom-0 p-4'>
     <div class="flex gap-3 items-center font-light text-sm text-grey">
-        <p>2019</p>
+        <p>{{movie.year}}</p>
         <div class="bg-grey h-1 w-1 rounded-full"></div>
 
         <div class="flex gap-3 items-center">
             <div>
                 <img src="/assets/icon-category-movie.svg" alt="">
             </div>
-            <p>Movie</p>
+            <p>{{movie.category}}</p>
         </div>
         <div class="bg-grey h-1 w-1 rounded-full"></div>
 
-        <p>PG</p>
+        <p>{{movie.rating}}</p>
     </div>
-    <p class='text-xl font-medium'>The Great Lands</p>
+    <p class='text-xl font-medium'>{{movie.title}}</p>
     </div>
 
 </div>

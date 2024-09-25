@@ -8,6 +8,8 @@ import { TvSeriesComponent } from './tv-series/tv-series.component';
 import { BookmarkComponent } from './bookmark/bookmark.component';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { TrendingMovieCardComponent } from './components/trending-movie-card/trending-movie-card.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MovieListComponent } from './movie-list/movie-list.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { TrendingMovieCardComponent } from './components/trending-movie-card/tre
     BookmarkComponent,
     MovieCardComponent,
     TrendingMovieCardComponent,
+    SidebarComponent,
+    MovieListComponent,
   ],
   imports: [
     CommonModule,

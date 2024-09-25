@@ -4,12 +4,20 @@ import { MediaContentComponent } from './media-content.component';
 import { MoviesComponent } from './movies/movies.component';
 import { TvSeriesComponent } from './tv-series/tv-series.component';
 import { BookmarkComponent } from './bookmark/bookmark.component';
+import { MovieListComponent } from './movie-list/movie-list.component';
 
 const routes: Routes = [
-  { path: '', component: MediaContentComponent },
-  { path: 'movies', component: MoviesComponent},
-  { path: 'series', component: TvSeriesComponent},
-  { path: 'bookmark', component: BookmarkComponent},
+  {
+    path: '',
+    component: MediaContentComponent,
+    children: [
+      { path: 'movies', component: MoviesComponent },
+      { path: 'series', component: TvSeriesComponent },
+      { path: 'bookmark', component: BookmarkComponent },
+      { path: 'movielist', component: MovieListComponent},
+      { path: '', redirectTo: 'movielist', pathMatch: 'full' }
+    ]
+  }
 ];
 
 @NgModule({
