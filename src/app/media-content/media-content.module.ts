@@ -9,7 +9,6 @@ import { BookmarkComponent } from './bookmark/bookmark.component';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { TrendingMovieCardComponent } from './components/trending-movie-card/trending-movie-card.component';
 
-
 @NgModule({
   declarations: [
     MediaContentComponent,
@@ -17,7 +16,7 @@ import { TrendingMovieCardComponent } from './components/trending-movie-card/tre
     TvSeriesComponent,
     BookmarkComponent,
     MovieCardComponent,
-    TrendingMovieCardComponent
+    TrendingMovieCardComponent,
   ],
   imports: [
     CommonModule,

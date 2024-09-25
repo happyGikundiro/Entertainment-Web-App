@@ -1,1 +1,41 @@
-<p>signup works!</p>
+
+<div class='min-h-screen bg-darkblue flex justify-center items-center'>
+    <div class="w-[400px] max-w-[90%] space-y-20">
+        <div class='flex justify-center'>
+        <img src="/assets/logo.svg" alt="logo">
+        </div>
+        <div class='bg-semidarkblue rounded-2xl p-6 space-y-4'>
+            <h2 class='text-white text-xl'>Sign Up</h2>
+            <form [formGroup]="signupForm" (ngSubmit)="handleSignup()" class='space-y-4'>
+                <div class='relative'>
+                    <input type="text" formControlName="email" placeholder='Email address' 
+                    class='bg-transparent border-b-2 border-greyishblue w-full p-2 outline-none text-white text-sm'
+                    [class.border-red]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+                    <p *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="absolute right-4 top-3 text-red text-xs">
+                        {{ getFormFieldError('email') }}
+                    </p>
+                </div>
+                <div class='relative'>
+                    <input type="password" formControlName="password" placeholder='Password' 
+                    class='bg-transparent border-b-2 border-greyishblue w-full p-2 outline-none text-white text-sm'
+                    [class.border-red]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+                    <p *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="absolute right-4 top-3 text-red text-xs">
+                        {{ getFormFieldError('password') }}
+                    </p>
+                </div>
+                <div class='relative'>
+                    <input type="password" formControlName="repeatpassword" placeholder='Repeat password' 
+                    class='bg-transparent border-b-2 border-greyishblue w-full p-2 outline-none text-white text-sm'
+                    [class.border-red]="signupForm.get('repeatpassword')?.invalid && signupForm.get('repeatpassword')?.touched">
+                    <p *ngIf="signupForm.get('repeatpassword')?.invalid && signupForm.get('repeatpassword')?.touched" class="absolute right-4 top-3 text-red text-xs">
+                        {{ getFormFieldError('repeatpassword') }}
+                    </p>
+                </div>
+                <div class='pt-6'>
+                <app-button text="Create an account"></app-button>
+                </div>
+            </form>
+            <p class='text-white text-center' >Already have an account? <span class='text-red cursor-pointer' (click)="navigateToLogin()">Login</span></p>
+        </div>
+      </div>
+</div>
