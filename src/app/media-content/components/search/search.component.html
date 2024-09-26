@@ -1,0 +1,9 @@
+<div class='flex gap-4 items-center pt-6 pb-2'>
+    <div>
+        <img src="/assets/icon-search.svg" alt="search-icon">
+    </div>
+
+    <input id="search-input" type="text" placeholder='Search for movies or TV series' 
+    (input)="onSearch($event)"
+    class='search-input bg-transparent w-full p-2 outline-none text-white text-xl'>
+</div>

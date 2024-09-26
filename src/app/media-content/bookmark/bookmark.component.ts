@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Movie } from '../../model/model';
 import { Store } from '@ngrx/store';
 import { selectAllMovies } from '../../store/Movies/movies.selectors';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-bookmark',
@@ -9,15 +10,18 @@ import { selectAllMovies } from '../../store/Movies/movies.selectors';
   styleUrl: './bookmark.component.css'
 })
 export class BookmarkComponent {
+  bookmarkedMovies$ = this.store.select(selectAllMovies);
+  searchTerm = new BehaviorSubject<string>('');
 
-  bookmarkedMovies: Movie[] = [];
+  filteredBookmarkedMovies$ = combineLatest([this.bookmarkedMovies$, this.searchTerm]).pipe(
+    map(([movies, term]) => 
+      movies.filter(movie => movie.isBookmarked === true && movie.title.toLowerCase().includes(term.toLowerCase()))
+    )
+  );
 
   constructor(private store: Store) {}
 
-  ngOnInit() {
-    this.store.select(selectAllMovies).subscribe(movies => {
-      this.bookmarkedMovies = movies.filter(movie => movie.isBookmarked === true);
-    });
+  onSearch(term: string) {
+    this.searchTerm.next(term);
   }
-
 }

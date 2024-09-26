@@ -1,8 +1,14 @@
 <div class='p-4'>
+    <app-search (search)="onSearch($event)"></app-search>
+
     <h2 class="text-white py-4 text-2xl">Movies</h2>
 
-    <div *ngIf="moviesList.length === 0" class='flex justify-center items-center xl:p-40'>
-      <p class='text-white'>No Movies found.</p>
+    <div *ngIf="moviesList.length === 0 && searchTerm.getValue() !== ''" class='flex justify-center items-center xl:p-40'>
+      <p class='text-white'>No Movies found for "{{ searchTerm.getValue() }}".</p>
+    </div>
+
+    <div *ngIf="moviesList.length > 0 && searchTerm.getValue() !== ''" class="text-white mb-4">
+      Found {{ moviesList.length }} {{ moviesList.length === 1 ? 'result' : 'results' }} for "{{ searchTerm.getValue() }}".
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -11,4 +17,3 @@
         </ng-container>
     </div>
 </div>
-  

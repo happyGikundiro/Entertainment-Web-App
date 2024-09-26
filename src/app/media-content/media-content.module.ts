@@ -10,6 +10,7 @@ import { MovieCardComponent } from './components/movie-card/movie-card.component
 import { TrendingMovieCardComponent } from './components/trending-movie-card/trending-movie-card.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MovieListComponent } from './movie-list/movie-list.component';
     TrendingMovieCardComponent,
     SidebarComponent,
     MovieListComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,

@@ -1,25 +1,41 @@
-
-<div class='p-5'>
-    <div>
-      <h2 class="text-white text-2xl mb-4">Trending</h2>
-    
-      <div class="xl:w-[1375px] overflow-x-scroll no-scrollbar ">
-        <div class="flex space-x-6">
-          <ng-container *ngFor="let movie of trendingMovies$ | async">
-            <app-trending-movie-card [movie]="movie"></app-trending-movie-card>
-          </ng-container>
-        </div>
-      </div>
-    </div>
+<div class='p-4'>
+  <app-search (search)="onSearch($event)"></app-search>
   
-    <div class="mt-10">
-      <h2 class="text-white text-2xl mb-4">Recommended for you</h2>
+  <div class='pt-4'>
+    <h2 class="text-white text-2xl mb-4">Trending</h2>
+    
+    <div *ngIf="noTrendingResults && searchInitiated" class="text-white mb-4">
+      No trending movies found for "{{ searchTerm | async }}"
+    </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-        <ng-container *ngFor="let movie of recommendedMovies$ | async">
-          <app-movie-card [movie]="movie"></app-movie-card>
+    <div *ngIf="trendingCount > 0 && searchInitiated" class="text-white mb-4">
+      Found {{ trendingCount }} results for "{{ searchTerm | async }}" in trending movies.
+    </div>
+
+    <div class="xl:w-[1375px] overflow-x-scroll no-scrollbar">
+      <div class="flex space-x-6">
+        <ng-container *ngFor="let movie of trendingMovies$ | async">
+          <app-trending-movie-card [movie]="movie"></app-trending-movie-card>
         </ng-container>
       </div>
     </div>
-</div>
+  </div>
   
+  <div class="mt-10">
+    <h2 class="text-white text-2xl mb-4">Recommended for you</h2>
+    
+    <div *ngIf="noRecommendedResults && searchInitiated" class="text-white mb-4">
+      No recommended movies found for "{{ searchTerm | async }}"
+    </div>
+
+    <div *ngIf="recommendedCount > 0 && searchInitiated" class="text-white mb-4">
+      Found {{ recommendedCount }} result for "{{ searchTerm | async }}" in recommended movies.
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+      <ng-container *ngFor="let movie of recommendedMovies$ | async">
+        <app-movie-card [movie]="movie"></app-movie-card>
+      </ng-container>
+    </div>
+  </div>
+</div>

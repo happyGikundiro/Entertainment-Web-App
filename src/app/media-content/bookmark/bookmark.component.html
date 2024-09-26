@@ -1,14 +1,15 @@
 <div class='p-4'>
-    <h2 class="text-white py-4 text-2xl">Bookmarked Movies</h2>
+  <app-search (search)="onSearch($event)"></app-search>
 
-    <div *ngIf="bookmarkedMovies.length === 0" class='flex justify-center items-center xl:p-40'>
-      <p class='text-white'>No Movies found.</p>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-        <ng-container *ngFor="let bookmarkedMovie of bookmarkedMovies">
-          <app-movie-card [movie]="bookmarkedMovie"></app-movie-card>
-        </ng-container>
-    </div>
-</div>
+  <h2 class="text-white py-4 text-2xl">Bookmarked Movies</h2>
   
+  <div *ngIf="(filteredBookmarkedMovies$ | async)?.length === 0" class='flex justify-center items-center xl:p-40'>
+    <p class='text-white'>No Movies found.</p>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+      <ng-container *ngFor="let bookmarkedMovie of filteredBookmarkedMovies$ | async">
+        <app-movie-card [movie]="bookmarkedMovie"></app-movie-card>
+      </ng-container>
+  </div>
+</div>
