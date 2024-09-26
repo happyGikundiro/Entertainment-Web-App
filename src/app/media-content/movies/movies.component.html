@@ -1,3 +1,14 @@
-<div class='bg-greyishblue p-4'>
-    <p class='bg-white'>movies works!</p>
+<div class='p-4'>
+    <h2 class="text-white py-4 text-2xl">Movies</h2>
+
+    <div *ngIf="moviesList.length === 0" class='flex justify-center items-center xl:p-40'>
+      <p class='text-white'>No Movies found.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+        <ng-container *ngFor="let movie of moviesList">
+          <app-movie-card [movie]="movie"></app-movie-card>
+        </ng-container>
+    </div>
 </div>
+  

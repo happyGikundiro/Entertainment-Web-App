@@ -1,45 +1,43 @@
-
 <div class="fixed z-50 bg-semidarkblue py-4 xl:py-8 px-8 flex justify-between items-center w-full md:rounded-2xl md:w-[95%] md:m-4 xl:w-20 xl:h-[95%] xl:flex-col xl:justify-between">
 
-    <button class='xl:hidden bg-slate- w-20 flex justify-center'>
+    <button class='xl:hidden bg-slate- w-20 flex justify-center' (click)="navigateTo('movielist')">
         <img src="/assets/logo.svg" alt="logo">
     </button>
 
     <div class='xl:hidden flex gap-4 sm:gap-6 items-center xl:flex-col'>
-        <button>
+        <a routerLink="movielist" routerLinkActive="active" class="flex items-center">
             <img src="/assets/icon-nav-home.svg" alt="home-icon">
-        </button>
-        <button>
+        </a>
+        <a routerLink="movies" routerLinkActive="active" class="flex items-center">
             <img src="/assets/icon-nav-movies.svg" alt="movie-icon">
-        </button>
-        <button>
+        </a>
+        <a routerLink="series" routerLinkActive="active" class="flex items-center">
             <img src="/assets/icon-nav-tv-series.svg" alt="tv-series-icon">
-        </button>
-        <button>
-            <img src="/assets/icon-nav-bookmark.svg" alt="">
-        </button>
+        </a>
+        <a routerLink="bookmark" routerLinkActive="active" class="flex items-center">
+            <img src="/assets/icon-nav-bookmark.svg" alt="bookmark-icon">
+        </a>
     </div>
     
     <div class='hidden xl:flex xl:flex-col xl:gap-20'>
-    <button class='bg-slate- w-20 flex justify-center'>
-        <img src="/assets/logo.svg" alt="logo">
-    </button>
+        <button class='bg-slate- w-20 flex justify-center' (click)="navigateTo('movielist')">
+            <img src="/assets/logo.svg" alt="logo">
+        </button>
 
-    <div class='flex gap-4 sm:gap-6 items-center xl:flex-col'>
-        
-        <button>
-            <img src="/assets/icon-nav-home.svg" alt="home-icon">
-        </button>
-        <button>
-            <img src="/assets/icon-nav-movies.svg" alt="movie-icon">
-        </button>
-        <button>
-            <img src="/assets/icon-nav-tv-series.svg" alt="tv-series-icon">
-        </button>
-        <button>
-            <img src="/assets/icon-nav-bookmark.svg" alt="">
-        </button>
-    </div>
+        <div class='flex gap-4 sm:gap-6 items-center xl:flex-col'>
+            <a routerLink="movielist" routerLinkActive="active" class="flex items-center">
+                <img src="/assets/icon-nav-home.svg" alt="home-icon">
+            </a>
+            <a routerLink="movies" routerLinkActive="active" class="flex items-center">
+                <img src="/assets/icon-nav-movies.svg" alt="movie-icon">
+            </a>
+            <a routerLink="series" routerLinkActive="active" class="flex items-center">
+                <img src="/assets/icon-nav-tv-series.svg" alt="tv-series-icon">
+            </a>
+            <a routerLink="bookmark" routerLinkActive="active" class="flex items-center">
+                <img src="/assets/icon-nav-bookmark.svg" alt="bookmark-icon">
+            </a>
+        </div>
     </div>
 
     <div class='border-[3px] rounded-full w-[50px] h-[50px] cursor-pointer'>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as MovieActions from '../../store/Movies/movies.actions'
 import { map, Observable } from 'rxjs';
 import { Movie } from '../../model/model';
 import { selectAllMovies } from '../../store/Movies/movies.selectors';
@@ -18,8 +17,6 @@ export class MovieListComponent implements OnInit{
   constructor(private store: Store){}
 
   ngOnInit(): void {
-    this.store.dispatch(MovieActions.loadMovies());
-
     this.trendingMovies$ = this.store.select(selectAllMovies).pipe(
       map(movies => movies.filter(movie => movie.isTrending))
     );

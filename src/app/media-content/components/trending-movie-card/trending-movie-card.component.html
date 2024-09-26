@@ -16,8 +16,8 @@
             </div>
         </div>
 
-        <button class="absolute top-4 right-4 bg-darkblue bg-opacity-50 p-2 rounded-full">
-            <img src="/assets/icon-bookmark-empty.svg" alt="bookmark-empty">
+        <button class="absolute top-4 right-4 bg-darkblue bg-opacity-50 p-2 rounded-full hover:bg-" (click)="toggleBookmark(movie)">
+            <img [src]="movie.isBookmarked ? '/assets/icon-bookmark-full.svg' : '/assets/icon-bookmark-empty.svg'" alt="bookmark-icon">
         </button>
 
     </div>
@@ -28,9 +28,13 @@
         <div class="bg-grey h-1 w-1 rounded-full"></div>
 
         <div class="flex gap-3 items-center">
-            <div>
-                <img src="/assets/icon-category-movie.svg" alt="">
+            <div *ngIf="movie.category === 'Movie'; else tvIcon">
+              <img src="/assets/icon-category-movie.svg" alt="movie-icon">
             </div>
+            <ng-template #tvIcon>
+              <img src="/assets/icon-category-tv.svg" alt="tv-icon">
+            </ng-template>
+
             <p>{{movie.category}}</p>
         </div>
         <div class="bg-grey h-1 w-1 rounded-full"></div>

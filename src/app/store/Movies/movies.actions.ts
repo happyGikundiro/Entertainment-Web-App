@@ -10,3 +10,7 @@ export const loadMoviesSuccess = createAction(
 export const loadMoviesFailure = createAction(
     '[Movies] Load Movies Failure', props<{error: string}>()
 );
+
+export const toggleBookmark = createAction(
+    '[Movies] Toggle Bookmark', props<{ movieId: string }>()
+  );

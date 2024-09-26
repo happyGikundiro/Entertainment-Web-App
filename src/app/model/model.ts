@@ -10,6 +10,7 @@ interface ThumbnailSize {
   }
   
  export interface Movie {
+    id: string;
     title: string;
     thumbnail: Thumbnail;
     year: number;

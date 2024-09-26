@@ -21,5 +21,12 @@ export const movieReducer = createReducer(
 
     on(MovieActions.loadMoviesSuccess, (state, {movies}) => ({...state, movies: movies, loading:false, error:null})),
 
-    on(MovieActions.loadMoviesFailure, (state, {error}) => ({...state, loading: false, error}))
+    on(MovieActions.toggleBookmark, (state, { movieId }) => ({
+        ...state,
+        movies: state.movies.map(movie =>
+          movie.id === movieId
+            ? { ...movie, isBookmarked: !movie.isBookmarked }
+            : movie
+        )
+      }))
 )
