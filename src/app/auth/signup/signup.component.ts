@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthServices } from '../auth.services';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-signup',
@@ -10,8 +12,13 @@ import { Router } from '@angular/router';
 export class SignupComponent {
 
   signupForm!: FormGroup;
+  user: User = {
+    email:'',
+    username: '',
+    password: ''
+  }
 
-  constructor(private fb: FormBuilder, private router: Router){}
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthServices){}
 
   ngOnInit(): void {
     this.initializeSignup();
@@ -39,7 +46,13 @@ export class SignupComponent {
 
   handleSignup() {
     if (this.signupForm.valid) {
-      console.log('form submited',this.signupForm.value)
+      const getSignupValues = this.signupForm.getRawValue();
+      this.authService.register(getSignupValues.email, getSignupValues.username, getSignupValues.password).
+      subscribe((response) => {
+        if (response.success) {
+          this.router.navigate(['']);
+        }
+      });
     }else{
       this.signupForm.markAllAsTouched();
     }
@@ -62,5 +75,4 @@ export class SignupComponent {
   navigateToLogin(): void{
     this.router.navigate([''])
   }
-
 }

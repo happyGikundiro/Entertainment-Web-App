@@ -40,7 +40,12 @@
         </div>
     </div>
 
-    <div class='border-[3px] rounded-full w-[50px] h-[50px] cursor-pointer'>
+    <div class='border-[3px] rounded-full w-[50px] h-[50px] cursor-pointer relative' (click)="toggleModal()">
         <img src="/assets/image-avatar.png" alt="profile" class='w-full h-full object-cover'>
     </div>
+   
+    <div *ngIf="isModalOpen" class=' absolute shadow-2xl top-20  xl:top-auto xl:left-20 xl:h-14 xl:bottom-10 right-2 bg-semidarkblue text-center p-4 rounded-md w-40 space-y-4'>
+        <button (click)="logout()" class='text-white'>Logout</button>
+    </div>
+    
 </div>

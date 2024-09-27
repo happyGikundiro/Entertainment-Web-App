@@ -1,0 +1,14 @@
+.custom-scroll ::-webkit-scrollbar {
+    width: 8px;
+  }
+  .custom-scroll ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  .custom-scroll ::-webkit-scrollbar-thumb {
+    background-color: #FC4747;
+    border-radius: 10px;
+  }
+  .custom-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #FC4747 transparent;
+  }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthServices } from '../auth.services';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit{
 
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router){}
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthServices){}
 
   ngOnInit(): void {
     this.initializeLogin();
@@ -26,7 +27,11 @@ export class LoginComponent implements OnInit{
 
   handleLogin() {
     if (this.loginForm.valid) {
-      console.log('form submited',this.loginForm.value)
+      const getLoginValues = this.loginForm.getRawValue();
+      this.authService.login(getLoginValues.email, getLoginValues.password).
+      subscribe(()=>{
+        this.router.navigate(['/home'])
+      })
     }else{
       this.loginForm.markAllAsTouched();
     }
@@ -47,5 +52,4 @@ export class LoginComponent implements OnInit{
   navigateToSignup(): void{
     this.router.navigate(['/signup'])
   }
-
 }
