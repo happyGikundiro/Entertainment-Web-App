@@ -1,15 +1,52 @@
 <div class='p-4'>
   <app-search (search)="onSearch($event)"></app-search>
 
-  <h2 class="text-white py-4 text-2xl">Bookmarked Movies</h2>
-  
-  <div *ngIf="(filteredBookmarkedMovies$ | async)?.length === 0" class='flex justify-center items-center xl:p-40'>
-    <p class='text-white'>No Movies found.</p>
+  <div *ngIf="loading$ | async" class=" flex justify-center items-center mt-20">
+    <div class="loader"></div>
   </div>
 
-  <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-      <ng-container *ngFor="let bookmarkedMovie of filteredBookmarkedMovies$ | async">
+  <div *ngIf="error$ | async as errorMsg" class="text-white mt-20">
+    Error loading movies: {{ errorMsg }}
+  </div>
+
+  <div *ngIf="!(loading$ | async) && !(error$ | async)">
+  <h2 class="text-white py-4 text-2xl">Bookmarked Movies</h2>
+  <div *ngIf="(filteredBookmarkedMovies$ | async) as filteredBookmarkedMovies">
+
+    <div *ngIf="searchTermValue?.trim() && filteredBookmarkedMovies.length > 0" class="py-2">
+      <p class="text-white">
+        Found {{ filteredBookmarkedMovies.length }} results for '{{ searchTermValue }}'
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+      <ng-container *ngFor="let bookmarkedMovie of filteredBookmarkedMovies">
         <app-movie-card [movie]="bookmarkedMovie"></app-movie-card>
       </ng-container>
+    </div>
+
+    <div *ngIf="searchTermValue?.trim() && filteredBookmarkedMovies.length === 0" class='flex justify-center items-center xl:p-40'>
+      <p class='text-white'>No Movies found for '{{ searchTermValue }}'.</p>
+    </div>
+  </div>
+
+  <h2 class="text-white py-4 text-2xl mt-6">Bookmarked TV Series</h2>
+  <div *ngIf="(filteredBookmarkedTvSeries$ | async) as filteredBookmarkedTvSeries">
+    <div *ngIf="searchTermValue?.trim() && filteredBookmarkedTvSeries.length > 0" class="py-2">
+      <p class="text-white">
+        Found {{ filteredBookmarkedTvSeries.length }} results for '{{ searchTermValue }}'
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+      <ng-container *ngFor="let bookmarkedTvSeries of filteredBookmarkedTvSeries">
+        <app-movie-card [movie]="bookmarkedTvSeries"></app-movie-card>
+      </ng-container>
+    </div>
+
+    <div *ngIf="searchTermValue?.trim() && filteredBookmarkedTvSeries.length === 0" class='flex justify-center items-center xl:p-40'>
+      <p class='text-white'>No TV Series found for '{{ searchTermValue }}'.</p>
+    </div>
+  </div>
   </div>
 </div>

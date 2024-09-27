@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectAllMovies } from '../../store/Movies/movies.selectors';
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { selectAllMovies, selectMoviesError, selectMoviesLoading } from '../../store/Movies/movies.selectors';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -9,17 +10,46 @@ import { map } from 'rxjs/operators';
   templateUrl: './bookmark.component.html',
   styleUrl: './bookmark.component.css'
 })
-export class BookmarkComponent {
-  bookmarkedMovies$ = this.store.select(selectAllMovies);
+export class BookmarkComponent implements OnInit{
   searchTerm = new BehaviorSubject<string>('');
+  searchTermValue: string = '';
 
-  filteredBookmarkedMovies$ = combineLatest([this.bookmarkedMovies$, this.searchTerm]).pipe(
-    map(([movies, term]) => 
-      movies.filter(movie => movie.isBookmarked === true && movie.title.toLowerCase().includes(term.toLowerCase()))
-    )
-  );
+  movies$ = this.store.select(selectAllMovies);
+
+  loading$!: Observable<boolean>;
+  error$!: Observable<string | null>;
 
   constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.loading$ = this.store.select(selectMoviesLoading);
+    this.error$ = this.store.select(selectMoviesError);
+  }
+
+  filteredBookmarkedMovies$ = combineLatest([this.movies$, this.searchTerm]).pipe(
+    map(([movies, term]) => {
+      this.searchTermValue = term;
+      const searchTermLower = term.toLowerCase();
+
+      return movies.filter(movie =>
+        movie.isBookmarked === true &&
+        movie.category.toLowerCase() === 'movie' &&
+        movie.title.toLowerCase().includes(searchTermLower)
+      );
+    })
+  );
+
+  filteredBookmarkedTvSeries$ = combineLatest([this.movies$, this.searchTerm]).pipe(
+    map(([movies, term]) => {
+      const searchTermLower = term.toLowerCase();
+
+      return movies.filter(movie =>
+        movie.isBookmarked === true &&
+        movie.category.toLowerCase() === 'tv series' &&
+        movie.title.toLowerCase().includes(searchTermLower)
+      );
+    })
+  );
 
   onSearch(term: string) {
     this.searchTerm.next(term);
