@@ -32,7 +32,8 @@
                     </p>
                 </div>
                 <div class='pt-6'>
-                <app-button text="Create an account"></app-button>
+                    <app-button *ngIf="!isLoading" text="Create an account"></app-button>
+                    <div class="spinner-wrapper" *ngIf="isLoading"><div class="loader"></div></div>
                 </div>
             </form>
             <p class='text-white text-center' >Already have an account? <span class='text-red cursor-pointer' (click)="navigateToLogin()">Login</span></p>

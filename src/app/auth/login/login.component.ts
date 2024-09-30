@@ -11,6 +11,7 @@ import { AuthServices } from '../auth.services';
 export class LoginComponent implements OnInit{
 
   loginForm!: FormGroup;
+  isLoading = false;
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthServices){}
 
@@ -28,10 +29,17 @@ export class LoginComponent implements OnInit{
   handleLogin() {
     if (this.loginForm.valid) {
       const getLoginValues = this.loginForm.getRawValue();
+      this.isLoading = true;
+
       this.authService.login(getLoginValues.email, getLoginValues.password).
       subscribe(()=>{
+        this.isLoading = false;
         this.router.navigate(['/home'])
-      })
+      },
+      error => {
+        this.isLoading = false;
+      }
+    )
     }else{
       this.loginForm.markAllAsTouched();
     }

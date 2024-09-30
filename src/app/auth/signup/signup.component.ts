@@ -12,6 +12,7 @@ import { User } from '../model/user';
 export class SignupComponent {
 
   signupForm!: FormGroup;
+  isLoading = false;
   user: User = {
     email:'',
     username: '',
@@ -47,11 +48,17 @@ export class SignupComponent {
   handleSignup() {
     if (this.signupForm.valid) {
       const getSignupValues = this.signupForm.getRawValue();
+      this.isLoading = true;
+
       this.authService.register(getSignupValues.email, getSignupValues.username, getSignupValues.password).
       subscribe((response) => {
+        this.isLoading = false; 
         if (response.success) {
           this.router.navigate(['']);
         }
+      },(error) => {
+        this.isLoading = false;
+        console.error(error);
       });
     }else{
       this.signupForm.markAllAsTouched();
