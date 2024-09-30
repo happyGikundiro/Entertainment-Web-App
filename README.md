@@ -9,14 +9,14 @@ In this project users are be able to:
 - Search for relevant shows on all pages
 
 ## Table of Contents
-- [Demo](https://entertainmentweb-app.netlify.app/)
+- [Demo](https://entertainment-web-app-azure.vercel.app/)
 - [Features](#features)
 - [Screenshoot](#screenshot)
 - [Installation](#installation)
 - [Usage](#usage)
 
 ## Demo
-You can see a live demo of the project [here](https://entertainmentweb-app.netlify.app/).
+You can see a live demo of the project [here](https://entertainment-web-app-azure.vercel.app/).
 
 ## Features
 - Signup form
